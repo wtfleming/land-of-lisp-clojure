@@ -1,13 +1,14 @@
 # wizards-adventure
 
-A Clojure library designed to ... well, that part is up to you.
-
 ## Usage
 
-FIXME
+$ lein repl
+wizards-adventure.core=> (game-repl)
+
+Play the game by entering commands, ie "look"
 
 ## License
 
-Copyright © 2013 FIXME
+Copyright © 2015 FIXME
 
 Distributed under the Eclipse Public License, the same as Clojure.

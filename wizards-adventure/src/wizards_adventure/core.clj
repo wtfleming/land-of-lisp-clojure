@@ -1,5 +1,6 @@
 (ns wizards-adventure.core
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str])
+  (:gen-class))
 
 (def nodes
   {:living-room "You are in the living-room. A wizard is snoring loudly on the couch."
@@ -34,7 +35,7 @@
   (let [[direction exit-type] exit-vec]
     (str "There is a " (name exit-type) " going " (name direction) " from here.")))
 
-(defn describe-paths [location edges]  
+(defn describe-paths [location edges]
   (map #(describe-path (second %))  (location edges)))
 
 
@@ -47,7 +48,6 @@
 (defn describe-objects [location object-locations]
   (map describe-object (objects-at location object-locations)))
 
-
 (defn edge-in-direction [loc direction edges]
    (for [x (loc edges)
          :when (some #{direction} (second x))]
@@ -55,7 +55,6 @@
 
 
 ;;; In game Commands
-
 (defn look []
   (str/join " "
             (concat
@@ -70,7 +69,7 @@
          (do
            (reset! location (first edge))
            (look)))))
-       
+
 (defn pickup [object]
   (if (some #{object} (objects-at @location @object-locations))
     (do
@@ -86,7 +85,6 @@
 
 
 ;;; Game repl
-
 (defn game-read []
   (let [command (read-string (str "(" (read-line) ")"))]
     (cons
@@ -107,4 +105,3 @@
     (when-not (= cmd :quit)
       (println (game-eval full-command))
       (recur))))
-
